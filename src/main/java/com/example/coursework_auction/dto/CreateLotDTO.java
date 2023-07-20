@@ -13,27 +13,21 @@ public class CreateLotDTO {
     }
 
     public static CreateLotDTO fromLot(Lot lot) {
-
         CreateLotDTO createLotDTO = new CreateLotDTO();
-
         createLotDTO.setTitle(lot.getTitle());
         createLotDTO.setDescription(lot.getDescription());
         createLotDTO.setStartPrice(lot.getStartPrice());
         createLotDTO.setBidPrice(lot.getBidPrice());
-
         return createLotDTO;
     }
 
     public Lot fromDTO() {
-
         Lot lot = new Lot();
-
         lot.setTitle(this.getTitle());
         lot.setDescription(this.getDescription());
         lot.setStartPrice(this.getStartPrice());
         lot.setBidPrice(this.getBidPrice());
         lot.setStatus(Status.CREATED);
-
         return lot;
     }
 
