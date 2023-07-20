@@ -113,7 +113,7 @@ public class LotServiceImpl implements LotService {
 
 
     @Override
-    public List<Lot> findLots(int page, int status) {
+    public List<Lot> findLots(int status, int page) {
         PageRequest.of(page, 10);
         logger.debug("find lots where status= " + status + "page= " + page);
         return lotRepository.findByStatus(PageRequest.of(page, 10), status);
@@ -130,7 +130,7 @@ public class LotServiceImpl implements LotService {
             createLot.setDescription(lot.getDescription());
             createLot.setStartPrice(lot.getStartPrice());
             createLot.setBidPrice(lot.getBidPrice());
-            createLots.add(createLot.createLot());
+            createLots.add(createLot.fromDTO());
         }
         try (CSVWriter writer = new CSVWriter(new FileWriter(csvFilePath))) {
             for (Lot createLot : createLots) {

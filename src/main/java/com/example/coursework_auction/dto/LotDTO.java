@@ -25,7 +25,6 @@ public class LotDTO {
     }
      public Lot fromDTO() {
          Lot lot = new Lot();
-
          lot.setTitle(this.getTitle());
          lot.setDescription(this.getDescription());
          lot.setStartPrice(this.getStartPrice());

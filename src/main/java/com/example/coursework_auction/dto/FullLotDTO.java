@@ -17,17 +17,33 @@ public class FullLotDTO {
     public FullLotDTO() {
     }
 
-    public static FullLotDTO fromLot(Lot lot){
+
+    public static FullLotDTO fromLot(Lot lot) {
         FullLotDTO fullLotDTO = new FullLotDTO();
+
         fullLotDTO.setId(lot.getId());
-        fullLotDTO.setStatus(lot.getStatus());
         fullLotDTO.setTitle(lot.getTitle());
+        fullLotDTO.setStatus(lot.getStatus());
         fullLotDTO.setDescription(lot.getDescription());
         fullLotDTO.setStartPrice(lot.getStartPrice());
         fullLotDTO.setBidPrice(lot.getBidPrice());
         fullLotDTO.setCurrentPrice(0);
         fullLotDTO.setLastBid(BidDTO.fromBid(new Bid()));
+
         return fullLotDTO;
+    }
+
+    public Lot fromDTO() {
+
+        Lot lot = new Lot();
+
+        lot.setTitle(this.getTitle());
+        lot.setDescription(this.getDescription());
+        lot.setStartPrice(this.getStartPrice());
+        lot.setBidPrice(this.getBidPrice());
+        lot.setStatus(Status.CREATED);
+
+        return lot;
     }
 
     public Integer getId() {

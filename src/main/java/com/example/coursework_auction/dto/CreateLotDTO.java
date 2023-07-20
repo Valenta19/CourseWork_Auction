@@ -1,6 +1,7 @@
 package com.example.coursework_auction.dto;
 
 import com.example.coursework_auction.model.Lot;
+import com.example.coursework_auction.model.Status;
 
 public class CreateLotDTO {
     private String title;
@@ -10,20 +11,29 @@ public class CreateLotDTO {
 
     public CreateLotDTO() {
     }
-    public static CreateLotDTO fromLot(Lot lot){
+
+    public static CreateLotDTO fromLot(Lot lot) {
+
         CreateLotDTO createLotDTO = new CreateLotDTO();
+
         createLotDTO.setTitle(lot.getTitle());
         createLotDTO.setDescription(lot.getDescription());
         createLotDTO.setStartPrice(lot.getStartPrice());
         createLotDTO.setBidPrice(lot.getBidPrice());
+
         return createLotDTO;
     }
-    public Lot createLot(){
+
+    public Lot fromDTO() {
+
         Lot lot = new Lot();
+
         lot.setTitle(this.getTitle());
         lot.setDescription(this.getDescription());
         lot.setStartPrice(this.getStartPrice());
         lot.setBidPrice(this.getBidPrice());
+        lot.setStatus(Status.CREATED);
+
         return lot;
     }
 

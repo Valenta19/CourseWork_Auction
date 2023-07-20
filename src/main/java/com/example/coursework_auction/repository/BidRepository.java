@@ -14,13 +14,13 @@ public interface BidRepository extends JpaRepository<Bid, Integer> {
 
     @Query(value = "SELECT * FROM bid WHERE lot_id = :id " +
             "GROUP BY bid.id " +
-            "ORDER BY count(bidName),bidName desc " +
+            "ORDER BY count(bid_name),bid_name desc " +
             "LIMIT 1",
             nativeQuery = true)
     Bid getFrequent(int id);
 
     @Query(value = "select * from bid WHERE lot_id = :id " +
-            "order by bidData desc " +
+            "order by bid_name desc " +
             "limit 1 ",
             nativeQuery = true)
     Bid getLastBid(int id);
