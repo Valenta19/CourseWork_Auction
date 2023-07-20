@@ -11,7 +11,6 @@ public class CreateLotDTO {
 
     public CreateLotDTO() {
     }
-
     public static CreateLotDTO fromLot(Lot lot) {
         CreateLotDTO createLotDTO = new CreateLotDTO();
         createLotDTO.setTitle(lot.getTitle());

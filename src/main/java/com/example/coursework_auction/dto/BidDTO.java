@@ -9,7 +9,6 @@ public class BidDTO {
     String bidName;
     LocalDateTime bidData;
 
-
     public static BidDTO fromBid(Bid bid) {
         BidDTO bidDTO = new BidDTO();
         bidDTO.setBidName(bid.getBidName());

@@ -17,7 +17,6 @@ public class FullLotDTO {
     public FullLotDTO() {
     }
 
-
     public static FullLotDTO fromLot(Lot lot) {
         FullLotDTO fullLotDTO = new FullLotDTO();
 

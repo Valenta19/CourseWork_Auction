@@ -13,6 +13,7 @@ public class LotDTO {
 
     public LotDTO() {
     }
+
     public static LotDTO fromLot(Lot lot){
         LotDTO lotDTO = new LotDTO();
         lotDTO.setId(lot.getId());
