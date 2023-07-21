@@ -120,28 +120,9 @@ public class LotServiceImpl implements LotService {
     }
 
     @Override
-    public String getLotCSV() {
-        List<Lot> lotEntity = lotRepository.findAll();
-        List<Lot> createLots = new ArrayList<>();
-        String csvFilePath = "lot.csv";
-        for (Lot lot : lotEntity) {
-            CreateLotDTO createLot = new CreateLotDTO();
-            createLot.setTitle(lot.getTitle());
-            createLot.setDescription(lot.getDescription());
-            createLot.setStartPrice(lot.getStartPrice());
-            createLot.setBidPrice(lot.getBidPrice());
-            createLots.add(createLot.fromDTO());
-        }
-        try (CSVWriter writer = new CSVWriter(new FileWriter(csvFilePath))) {
-            for (Lot createLot : createLots) {
-                writer.writeNext(new String[]{createLot.getTitle(), createLot.getDescription(),
-                        String.valueOf(createLot.getStartPrice()),
-                        String.valueOf(createLot.getBidPrice())});
-            }
-        } catch (IOException e) {
-            logger.debug("File not found");
-        }
-        return csvFilePath;
+    public List<Lot> getLotCSV() {
+        List<Lot> list;
+            list = lotRepository.findAll();
+            return list;
     }
-    
 }

@@ -5,8 +5,20 @@ import com.example.coursework_auction.dto.FullLotDTO;
 import com.example.coursework_auction.dto.LotDTO;
 import com.example.coursework_auction.model.Lot;
 import com.example.coursework_auction.service.LotService;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
+import org.springframework.core.io.PathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +71,31 @@ private final LotService lotService;
         return lotService.findLots(page,status);
     }
     @GetMapping("/export")
-    public String getCSVFile() {
-        return lotService.getLotCSV();
+    public ResponseEntity<Resource> getCSVFile() throws IOException {
+
+        String name = "lots.csv";
+
+        List<Lot> list = lotService.getLotCSV();
+
+        BufferedWriter writer = Files.newBufferedWriter(Paths.get(name));
+        CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
+                .withHeader("id", "title", "status", "description", "startPrice", "bidPrice"));
+
+        list.forEach(lot -> {
+            try {
+                csvPrinter.printRecord(lot.getId(), lot.getTitle(), lot.getStatus(), lot.getDescription(), lot.getStartPrice(), lot.getBidPrice());
+                csvPrinter.flush();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+
+        Resource resource = new PathResource(name);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + name + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(resource);
     }
 }

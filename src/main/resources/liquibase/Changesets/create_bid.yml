@@ -13,10 +13,10 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
-                  name: bidName
+                  name: bid_name
                   type: varchar(255)
               - column:
-                  name: bidData
+                  name: bid_data
                   type: datetime
               - column:
                   name: lot_id
@@ -24,5 +24,3 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_key_lot
                     references: lot(id)
-
-

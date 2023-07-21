@@ -25,5 +25,5 @@ public interface LotService {
 
     List<Lot> findLots(int page, int status);
 
-    String getLotCSV();
+    List<Lot> getLotCSV();
 }
